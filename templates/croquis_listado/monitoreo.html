@@ -1,0 +1,48 @@
+{% extends 'base_mapa.html' %}
+{% load  staticfiles %}
+{% block customcss %}
+    <style>
+        html,body,#mapa {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        .panel panel-flat{
+            z-index: 5;
+            
+        }
+
+
+    </style>
+{% endblock %}
+
+{% block mapa %}
+    <div id="mapa">
+        <select id="ambitoGeografico">
+            <option value="0">Departamental</option>
+            <option value="1">Provincial</option>
+            <option value="2">Distrital</option>
+        </select>
+    </div>
+{% endblock %}
+
+    <div class="panel panel-flat">
+        <div class="table-responsive">
+        {% block table-view %} {% endblock %}
+        </div>
+    </div>
+
+
+
+{% block requirejs %}
+    <script type="text/javascript">
+        var App = {
+            filerequired: {
+                service: ['ajax', 'croquis_listado'],
+                utils: ['croquis_listado']
+            }
+        };
+    </script>
+{% endblock %}

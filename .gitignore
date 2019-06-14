@@ -1,0 +1,5 @@
+collections
+static/assets
+__pycache__
+*.pyc
+.idea
