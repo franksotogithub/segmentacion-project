@@ -70,7 +70,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'segmentacion.urls'
@@ -96,40 +95,32 @@ WSGI_APPLICATION = 'segmentacion.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-import dj_database_url
-from  decouple import config
 
 DATABASES = {
-    'default':dj_database_url.config(
-        default=config('DATABASE_URL')
-    )
-
+    'segmentacion': {
+        'ENGINE': 'sql_server.pyodbc',
+        'HOST': '192.168.0.50\\MSSQLSERVER2016',
+        'NAME': 'SEGMENTACION',
+        'USER': 'sa',
+        'PASSWORD': 'MBs0p0rt301',
+        'PORT': '1434',
+    },
+    'cpv_segmentacion':{
+        'ENGINE': 'sql_server.pyodbc',
+        'HOST': '192.168.0.50\\MSSQLSERVER2016',
+        'NAME': 'CPV_SEGMENTACION',
+        'USER': 'sa',
+        'PASSWORD': 'MBs0p0rt301',
+        'PORT': '1434',
+        #'OPTIONS': {
+        #    'driver': 'SQL Server Native Client 13.0',
+        #},
+    },
+    'default':{
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    },
 }
-#DATABASES = {
-#    'segmentacion': {
-#        'ENGINE': 'sql_server.pyodbc',
-#        'HOST': '192.168.0.50\\MSSQLSERVER2016',
-#        'NAME': 'SEGMENTACION',
-#        'USER': 'sa',
-#        'PASSWORD': 'MBs0p0rt301',
-#        'PORT': '1434',
-#    },
-#    'cpv_segmentacion':{
-#        'ENGINE': 'sql_server.pyodbc',
-#        'HOST': '192.168.0.50\\MSSQLSERVER2016',
-#        'NAME': 'CPV_SEGMENTACION',
-#        'USER': 'sa',
-#        'PASSWORD': 'MBs0p0rt301',
-#        'PORT': '1434',
-#        #'OPTIONS': {
-#        #    'driver': 'SQL Server Native Client 13.0',
-#        #},
-#    },
-#    'default':{
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#    },
-#}
 
 
 # Password validation
@@ -168,8 +159,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')
-
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
@@ -196,5 +185,3 @@ JWT_AUTH = {
         'core.utils.jwt_response_payload_handler',
 
 }
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
