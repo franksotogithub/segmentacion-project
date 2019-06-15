@@ -26,5 +26,4 @@ urlpatterns = [
     url(r'^usuarios/api/',include('usuarios.api.urls',namespace='usuarios_api')),
     #url(r'^rest-auth/', include('rest_auth.urls')),
     #url(r'^rest-auth/registration', include('rest_auth.registration.urls')),
-]
-+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
