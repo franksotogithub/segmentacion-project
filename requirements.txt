@@ -9,7 +9,7 @@ django-extensions==2.1.5
 django-js-asset==1.1.0
 django-mptt==0.9.1
 django-rest-auth==0.9.5
-djangorestframework==3.9.1
+djangorestframework==3.11.2
 djangorestframework-jwt==1.11.0
 gunicorn==19.9.0
 idna==2.8
